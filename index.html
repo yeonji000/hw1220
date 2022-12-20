@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        .row {
+          width:420px;
+          margin:0 auto; 
+          cursor: pointer;
+        }      
+        .row ul {
+          list-style:none;
+          margin-top:20%;
+          padding:0;
+        }
+        .row ul li {
+          display:inline-table;        
+		    }
+				
+      /* 라이트 박스 안의 이미지 */
+        #lightbox img {
+          position:absolute;  /* top, left에 의해 위치 지정 */
+          top:50%;  /* 위쪽에서 50% 부터 */
+          left:50%;  /* 왼쪽에서 50% 부터 */
+          transform:translate(-50%, -50%);  /* 요소를 화면 중앙에 표시하기 위해 이동 */
+          border:5px solid #eee; /* 이미지 테두리 */      
+        }
+    </style>
+    <title>라이트박스</title>
+  </head>
+  <body>
+    <div class="row">
+      <ul>
+        <!-- 속성
+          src : html사양에서 정의된 기능적인 의미를 가지고 있음
+          data-src : 의미없음을 정의하지만 스크립트에서 사용되는 소자 -->
+        <li><img src="img/Arte-1-thumb.jpg" data-src="img/Arte-1.jpg" class="pic"></li>
+        <li><img src="img/BlueRoom-1-thumb.jpg" data-src="img/BlueRoom-1.jpg" class="pic"></li>
+        <li><img src="img/Dstrict-1-thumb.jpg" data-src="img/Dstrict-1.jpg" class="pic"></li> 
+        <li><img src="img/SiloLab-1-thumb.jpg" data-src="img/SiloLab-1.jpg" class="pic"></li>
+        <li><img src="img/TeamLab-1-thumb.jpg" data-src="img/TeamLab-1.jpg" class="pic"></li>
+        <li><img src="img/Bunker-1-thumb.jpg" data-src="img/Bunker-1.jpg" class="pic"></li>          
+      </ul>    
+    </div>
+    <div id="lightbox">
+			<img src="img/Arte-1.jpg" alt="" id="lightboxImage">			
+    </div> 
+
+    <!-- 스크립트 -->
+    <script>
+      let pics = document.getElementsByClassName('pic');
+      //.pic인 요소들을 가져와 변수 pics에 저장(=querySelectorAll('.pic')도 가능)
+      let lightbox = document.getElementById('lightbox');
+      let lightboxImage = document.getElementById('lightboxImage');
+       
+      //for(초기화; 식(어디까지); 증감);
+      for(i=0;i<pics.length;i++){
+        pics[i].addEventListener('click',shadowLightbox);
+      }
+      function shadowLightbox(){
+        let bigImg = this.getAttribute('data-src'); //this.data-src;
+        lightboxImage.setAttribute('src', bigImg);
+        lightbox.style.display = 'block';
+      }
+
+      //click 이벤트가 발생했을 때 실행할 함수 선언
+      lightbox.onclick=function(){
+        lightbox.style.display = 'none';
+      }
+    </script>
+  </body>
+</html>
